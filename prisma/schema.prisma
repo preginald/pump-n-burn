@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// model User {
+//   id    Int     @id @default(autoincrement())
+//   email String  @unique
+//   name  String?
+// }
+
+model Gym {
+  id       String    @id @default(uuid())
+  name     String    @db.VarChar(255)
+  address  String?
+  sessions Session[]
+}
+
+model Session {
+  id     String    @id @default(uuid())
+  start  DateTime  @default(now()) @db.DateTime(6)
+  finish DateTime?
+  gym    Gym       @relation(fields: [gym_id], references: [id])
+  gym_id String
+  sets   Set[]
+  target Json?
+}
+
+model Set {
+  id          String      @id @default(uuid())
+  start       DateTime    @default(now()) @db.DateTime(6)
+  finish      DateTime    @default(now()) @db.DateTime(6)
+  duration    Int
+  rest        Int?
+  session     Session     @relation(fields: [session_id], references: [id])
+  session_id  String
+  exercise    Exercise    @relation(fields: [exercise_id], references: [id])
+  exercise_id String
+  weight      Decimal
+  unit        WeightUnits
+  reps_r      Int
+  reps_l      Int?
+  type        SetTypes    @default(Warm)
+}
+
+model Exercise {
+  id        String            @id @default(uuid())
+  name      String            @db.VarChar(255)
+  type      ExerciseTypes
+  mechanics ExerciseMechanics
+  force     ExerciseForce
+  lateral   ExerciseLateral
+  sets      Set[]
+  agonists  ExerciseAgonist[]
+}
+
+model Muscle {
+  id             String       @id @default(uuid())
+  name           String       @db.VarChar(255)
+  MuscleGroups   MuscleGroup? @relation(fields: [muscleGroupsId], references: [id])
+  muscleGroupsId String?
+}
+
+model MuscleGroup {
+  id        String            @id @default(uuid())
+  name      String            @db.VarChar(255)
+  muscles   Muscle[]
+  exercises ExerciseAgonist[]
+}
+
+model ExerciseAgonist {
+  agonist       MuscleGroup @relation(fields: [muscleGroupId], references: [id])
+  exercise      Exercise    @relation(fields: [exerciseId], references: [id])
+  muscleGroupId String
+  exerciseId    String
+
+  @@id([muscleGroupId, exerciseId])
+}
+
+enum SetTypes {
+  Warm
+  Heavy
+}
+
+enum WeightUnits {
+  KG
+  LB
+}
+
+enum ExerciseTypes {
+  Barbell
+  Body
+  Dumbell
+  Machine
+  Plate
+  Cable
+}
+
+enum ExerciseMechanics {
+  Compound
+  Isolation
+}
+
+enum ExerciseForce {
+  Pull
+  Push
+}
+
+enum ExerciseLateral {
+  Bi
+  Uni
+}
