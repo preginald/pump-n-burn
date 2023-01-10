@@ -8,6 +8,9 @@ export async function createSession(data: any) {
 
 export async function readSessions() {
   return await prisma.session.findMany({
+    orderBy: {
+      start: "desc",
+    },
     include: {
       gym: true, // Return all fields
     },
