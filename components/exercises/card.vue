@@ -14,15 +14,15 @@
         </div>
       </div>
     </div>
-    <div v-if="exercise.hover" class="flex justify-end">
-      <span v-for="agonist in exercise.agonists" class="badge-red self-end">
-        {{ agonist.agonist.name }}
-      </span>
-    </div>
     <div class="flex justify-between">
-      <p class="id">{{ exercise.id }}</p>
+      <div v-if="exercise.hover" class="flex justify-end">
+        <span v-for="agonist in exercise.agonists" class="badge-red self-end">
+          {{ agonist.agonist.name }}
+        </span>
+      </div>
+      <!-- <p class="id">{{ exercise.id }}</p> -->
       <span
-        v-show="!exercise.expand && exercise.hover"
+        v-if="!exercise.expand && exercise.hover"
         @click="editExercise(exercise)"
         class="btn-txt"
       >
