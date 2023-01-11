@@ -13,9 +13,9 @@
         </button>
       </div>
     </div>
-    <div v-for="session in sessionStore.sessions">
-      <SessionsCard :session="session" />
-    </div>
+  </div>
+  <div v-for="session in sessionStore.sessions">
+    <SessionsCard :session="session" />
   </div>
 </template>
 

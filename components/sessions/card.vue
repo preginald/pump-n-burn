@@ -1,24 +1,25 @@
 <template>
-  <div class="card-container">
-    <div class="flex justify-between">
-      <h5>{{ prettyDateTime(session.start) }}</h5>
-      <h5 v-if="session.finish !== null">
-        {{ globalFunctions.diffBtwDt(session.start, session.finish) }}
-      </h5>
-      <div v-else>
-        <span class="badge-green">In Progress</span>
+  <NuxtLink :to="`/sessions/${session.id}`">
+    <div class="card-container">
+      <div class="flex justify-between">
+        <h5>{{ prettyDateTime(session.start) }}</h5>
+        <h5 v-if="session.finish !== null"></h5>
       </div>
-      <p class="text-sm">{{ session.gym.name }}</p>
+      <div class="flex justify-between">
+        <div v-if="session.finish === null">
+          <span class="badge-green">In Progress</span>
+        </div>
+        <div v-else>
+          <span class="badge-dark">
+            {{ globalFunctions.diffBtwDt(session.start, session.finish) }}
+          </span>
+        </div>
+        <div>
+          <p class="badge-default">{{ session.gym.name }}</p>
+        </div>
+      </div>
     </div>
-    <NuxtLink :to="`/sessions/${session.id}`">
-      <p class="id">{{ session.id }}</p></NuxtLink
-    >
-  </div>
-  <!-- <div>
-    <label for="Start"></label>
-    <input type="datetime" />
-  </div> -->
-  <!-- <pre>{{ session }}</pre> -->
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">

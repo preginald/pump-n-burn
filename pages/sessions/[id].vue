@@ -1,5 +1,20 @@
 <template>
-  <h5><span v-if="sessionStore.form">End</span> Session</h5>
+  <div class="flex justify-between items-center">
+    <h5><span v-if="sessionStore.form">End</span> Session</h5>
+    <p class="id">{{ sessionStore.session.id }}</p>
+    <h5 v-if="sessionStore.session.finish !== null">
+      {{
+        globalFunctions.diffBtwDt(
+          sessionStore.session.start,
+          sessionStore.session.finish
+        )
+      }}
+    </h5>
+    <div v-else>
+      <span class="badge-green">In Progress</span>
+    </div>
+    <p class="text-sm">{{ sessionStore.session.gym.name }}</p>
+  </div>
   <SessionsEditForm v-if="sessionStore.form" />
   <SessionsCard :session="sessionStore.session" />
   <Restwatch v-if="setStore.rest" />
