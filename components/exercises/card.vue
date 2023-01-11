@@ -6,19 +6,17 @@
   >
     <div class="flex justify-between">
       <h6>{{ exercise.type }} {{ exercise.name }}</h6>
-      <div>
-        <div>
-          <span class="badge-dark">{{ exercise.mechanics }}</span>
-          <span class="badge-dark">{{ exercise.lateral }}</span>
-          <span class="badge-dark">{{ exercise.force }}</span>
-        </div>
-      </div>
+    </div>
+    <div>
+      <span v-for="agonist in exercise.agonists" class="badge-red self-end">
+        {{ agonist.agonist.name }}
+      </span>
     </div>
     <div class="flex justify-between">
       <div v-if="exercise.hover" class="flex justify-end">
-        <span v-for="agonist in exercise.agonists" class="badge-red self-end">
-          {{ agonist.agonist.name }}
-        </span>
+        <span class="badge-dark">{{ exercise.mechanics }}</span>
+        <span class="badge-dark">{{ exercise.lateral }}</span>
+        <span class="badge-dark">{{ exercise.force }}</span>
       </div>
       <!-- <p class="id">{{ exercise.id }}</p> -->
       <span

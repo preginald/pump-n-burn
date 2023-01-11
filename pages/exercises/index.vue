@@ -4,13 +4,13 @@
       <ExercisesForm v-if="exerciseStore.form" />
       <div v-else>
         <button @click="exerciseStore.toggleForm(true)" class="btn-green-lg">
-          Add
+          Add Exercise
         </button>
       </div>
     </div>
-    <div v-for="exercise in exerciseStore.exercises">
-      <ExercisesCard :exercise="exercise" />
-    </div>
+  </div>
+  <div v-for="exercise in exerciseStore.exercises">
+    <ExercisesCard :exercise="exercise" />
   </div>
 </template>
 
