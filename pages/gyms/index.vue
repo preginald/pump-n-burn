@@ -8,9 +8,9 @@
         </button>
       </div>
     </div>
-    <div v-for="gym in gymStore.gyms">
-      <GymsCard :gym="gym" />
-    </div>
+  </div>
+  <div v-for="gym in gymStore.gyms">
+    <GymsCard :gym="gym" />
   </div>
   <!-- <pre>{{ gymStore }}</pre> -->
 </template>
