@@ -6,14 +6,14 @@
         <MusclesGroupsForm v-if="muscleGroupStore.form" />
         <div v-else>
           <button @click="muscleGroupStore.form = true" class="btn-green-lg">
-            Add
+            Add Muscle Group
           </button>
         </div>
       </div>
-      <div v-for="muscleGroup in useMuscleGroupStore().muscleGroups">
-        <MusclesGroupsCard :muscleGroup="muscleGroup" />
-      </div>
     </div>
+  </div>
+  <div v-for="muscleGroup in useMuscleGroupStore().muscleGroups">
+    <MusclesGroupsCard :muscleGroup="muscleGroup" />
   </div>
   <div>
     <h2>Muscles</h2>
@@ -22,14 +22,14 @@
         <MusclesForm v-if="muscleStore.form" />
         <div v-else>
           <button @click="muscleStore.form = true" class="btn-green-lg">
-            Add
+            Add Muscle
           </button>
         </div>
       </div>
-      <div v-for="muscle in useMuscleStore().muscles">
-        <MusclesCard :muscle="muscle" />
-      </div>
     </div>
+  </div>
+  <div v-for="muscle in useMuscleStore().muscles">
+    <MusclesCard :muscle="muscle" />
   </div>
 </template>
 
