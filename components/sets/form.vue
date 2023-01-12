@@ -106,6 +106,7 @@
           >Reps R</label
         >
         <input
+          @click="stopwatchStore.stop()"
           v-model="setStore.set.reps_r"
           type="number"
           id="reps_r"
@@ -136,9 +137,11 @@
 import { useExerciseStore } from "@/stores/ExerciseStore";
 import { useSessionStore } from "@/stores/SessionStore";
 import { useSetStore } from "@/stores/SetStore";
+import { useStopwatchStore } from "@/stores/StopwatchStore";
 const exerciseStore = useExerciseStore();
 const sessionStore = useSessionStore();
 const setStore = useSetStore();
+const stopwatchStore = useStopwatchStore();
 
 const id: string | string[] = useRoute().params.id;
 await exerciseStore.readExercises();
