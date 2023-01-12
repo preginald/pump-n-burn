@@ -17,56 +17,50 @@
 
 <script setup lang="ts">
 import { useSetStore } from "@/stores/SetStore";
+import { useStopwatchStore } from "@/stores/StopwatchStore";
 const setStore = useSetStore();
+const stopwatchStore = useStopwatchStore();
 
 let startBtnState = ref("Start");
 
-var timeBegan: any = ref(null),
-  timeStopped = ref(),
-  stoppedDuration: any = ref(),
-  started = ref(),
-  running = ref(false);
-
 function start() {
-  if (running.value) return;
+  if (stopwatchStore.running) return;
 
-  if (timeBegan.value === null) {
+  if (stopwatchStore.timeBegan === null) {
     reset();
-    timeBegan.value = new Date();
-    // setStore.start = new Date().toISOString();
+    stopwatchStore.timeBegan = new Date();
     setStore.duration = new Date().toISOString();
   }
 
-  if (timeStopped.value !== null) {
-    stoppedDuration.value += new Date() - timeStopped.value;
+  if (stopwatchStore.timeStopped !== null) {
+    stopwatchStore.stoppedDuration += new Date() - stopwatchStore.timeStopped;
   }
 
-  started.value = setInterval(clockRunning, 10);
-  running.value = true;
+  stopwatchStore.started = setInterval(clockRunning, 10);
+  stopwatchStore.running = true;
 }
 
 function stop() {
-  running.value = false;
-  timeStopped.value = new Date();
-  clearInterval(started.value);
+  stopwatchStore.running = false;
+  stopwatchStore.timeStopped = new Date();
+  clearInterval(stopwatchStore.started);
 }
 
 function reset() {
-  running.value = false;
-  clearInterval(started.value);
-  stoppedDuration.value = 0;
-  timeBegan.value = null;
-  timeStopped.value = null;
+  stopwatchStore.running = false;
+  clearInterval(stopwatchStore.started);
+  stopwatchStore.stoppedDuration = 0;
+  stopwatchStore.timeBegan = null;
+  stopwatchStore.timeStopped = null;
   setStore.duration = "00:00:00.000";
   startBtnState.value = "Start";
 }
 
 const setState = () => {
   if (startBtnState.value == "Start") {
-    // setStore.toggleRest(false);
-    // setStore.set.rest = setStore.rest.duration;
-    // setStore.set.rest = parseInt(setStore.set.rest),
-    setStore.stop();
+    setStore.toggleRest(false);
+    setStore.set.rest = setStore.rest.duration;
+    (setStore.set.rest = parseInt(setStore.set.rest)), setStore.stop();
     start();
     startBtnState.value = "Pause";
   } else {
@@ -76,14 +70,16 @@ const setState = () => {
 };
 
 function clockRunning() {
-  var currentTime: any = ref(new Date()),
-    timeElapsed = new Date(
-      currentTime.value - timeBegan.value - stoppedDuration.value
-    ),
-    hour = timeElapsed.getUTCHours(),
-    min = timeElapsed.getUTCMinutes(),
-    sec = timeElapsed.getUTCSeconds(),
-    ms = timeElapsed.getUTCMilliseconds();
+  var currentTime: any = ref(new Date());
+  var timeElapsed = new Date(
+    currentTime.value -
+      stopwatchStore.timeBegan -
+      stopwatchStore.stoppedDuration
+  );
+  var hour = timeElapsed.getUTCHours();
+  var min = timeElapsed.getUTCMinutes();
+  var sec = timeElapsed.getUTCSeconds();
+  var ms = timeElapsed.getUTCMilliseconds();
 
   setStore.duration =
     zeroPrefix(hour, 2) +
