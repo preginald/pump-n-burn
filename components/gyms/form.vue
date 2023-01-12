@@ -14,10 +14,10 @@
         </div>
       </div>
       <div class="grid gap-6 mb-6 grid-cols-2">
-        <button @click="submitForm" class="btn-green-lg">Save</button>
-        <button @click="gymStore.form = false" class="btn-red-lg">
+        <button @click="gymStore.form = false" class="btn-default-lg">
           Cancel
         </button>
+        <button @click="submitForm" class="btn-green-lg">Save</button>
       </div>
     </div>
   </div>

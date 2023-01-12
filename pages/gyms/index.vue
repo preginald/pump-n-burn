@@ -4,7 +4,7 @@
       <GymsForm v-if="gymStore.form" />
       <div v-else>
         <button @click="gymStore.toggleForm(true)" class="btn-green-lg">
-          Add
+          Add Gym
         </button>
       </div>
     </div>
