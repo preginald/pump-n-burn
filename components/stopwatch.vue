@@ -40,11 +40,11 @@ function start() {
   stopwatchStore.running = true;
 }
 
-function stop() {
-  stopwatchStore.running = false;
-  stopwatchStore.timeStopped = new Date();
-  clearInterval(stopwatchStore.started);
-}
+// function stop() {
+//   stopwatchStore.running = false;
+//   stopwatchStore.timeStopped = new Date();
+//   clearInterval(stopwatchStore.started);
+// }
 
 function reset() {
   stopwatchStore.running = false;
@@ -64,7 +64,8 @@ const setState = () => {
     start();
     startBtnState.value = "Pause";
   } else {
-    stop();
+    // stop();
+    stopwatchStore.stop();
     startBtnState.value = "Start";
   }
 };

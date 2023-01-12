@@ -11,7 +11,13 @@ export const useStopwatchStore = defineStore("StopwatchStore", {
     };
   },
 
-  actions: {},
+  actions: {
+    stop() {
+      this.running = false;
+      this.timeStopped = new Date();
+      clearInterval(this.started);
+    },
+  },
 
   // getters
 });
