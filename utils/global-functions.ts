@@ -68,4 +68,11 @@ export default {
     const diff = new Date(finish).getTime() - new Date(start).getTime();
     return this.millisecondsToDuration(diff);
   },
+  convertDateToDaysAgo(start: string) {
+    const setDate = new Date(start);
+    const currentDate = new Date();
+    const diffTime = Math.abs(currentDate.getTime() - setDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return `${diffDays} days ago`;
+  },
 };
