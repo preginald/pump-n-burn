@@ -12,7 +12,8 @@
       </div>
     </div>
   </div>
-  <div v-for="muscleGroup in useMuscleGroupStore().muscleGroups">
+  <div v-for="muscleGroup in muscleGroupStore.muscleGroups">
+    <!-- <pre>{{ muscleGroup }}</pre> -->
     <MusclesGroupsCard :muscleGroup="muscleGroup" />
   </div>
   <div>
@@ -36,9 +37,15 @@
 <script setup lang="ts">
 import { useMuscleGroupStore } from "@/stores/MuscleGroupStore";
 import { useMuscleStore } from "@/stores/MuscleStore";
+import { useSetStore } from "@/stores/SetStore";
+
 const muscleGroupStore = useMuscleGroupStore();
 const muscleStore = useMuscleStore();
+const setStore = useSetStore();
 
+const muscleGroups = muscleGroupStore.muscleGroups;
+
+await setStore.readSets();
 await muscleGroupStore.readMuscleGroups();
 await muscleStore.readMuscles();
 </script>

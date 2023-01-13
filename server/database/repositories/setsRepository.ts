@@ -8,13 +8,13 @@ export async function createSet(data: any) {
 
 export async function readSets() {
   return await prisma.set.findMany({
-    // include: {
-    //   // agonists: true, // Return all fields
-    //   // include: {
-    //   //   muscleGroup: true,
-    //   // },
-    // },
-    // include: { agonists: { include: { agonist: true } } },
+    include: {
+      exercise: {
+        include: {
+          agonists: true,
+        }, // Return all fields
+      },
+    },
   });
 }
 

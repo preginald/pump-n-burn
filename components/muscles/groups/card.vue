@@ -4,6 +4,13 @@
       <div>
         <h6>{{ muscleGroup.name }}</h6>
       </div>
+      <div>
+        <span class="badge-default">
+          {{
+            globalFunctions.convertDateToDaysAgo(muscleGroup.mostRecentSetStart)
+          }}
+        </span>
+      </div>
     </div>
     <p class="id">{{ muscleGroup.id }}</p>
     <div v-if="muscleGroup.expand" class="mt-2">
@@ -21,6 +28,5 @@
 const { muscleGroup } = defineProps(["muscleGroup"]);
 const expand = (muscleGroup: any) => {
   muscleGroup.expand = !muscleGroup.expand;
-  console.log(muscleGroup.expand);
 };
 </script>

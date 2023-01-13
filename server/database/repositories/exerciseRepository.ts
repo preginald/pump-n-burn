@@ -29,7 +29,7 @@ export async function readExercises() {
     //     muscleGroup: true,
     //   },
     // },
-    include: { agonists: { include: { agonist: true } } },
+    include: { agonists: { include: { agonist: true } }, sets: true },
   });
 }
 
