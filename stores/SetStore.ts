@@ -32,6 +32,10 @@ export const useSetStore = defineStore("SetStore", {
   },
 
   actions: {
+    async readSets() {
+      const { data } = await useFetch("/api/sets/session/");
+      return data;
+    },
     async readSetsBySessionId(session_id: string) {
       const { data } = await useFetch("/api/sets/session/" + session_id);
       this.sets = data;
