@@ -37,9 +37,12 @@
 <script setup lang="ts">
 import { useSessionStore } from "@/stores/SessionStore";
 import { useGymStore } from "@/stores/GymStore";
+import { useNavStore } from "@/stores/NavStore";
 import globalfunctions from "@/utils/global-functions";
 const sessionStore = useSessionStore();
 const gymStore = useGymStore();
+const navStore = useNavStore();
+
 await gymStore.readGyms();
 
 async function resetDateTime() {
@@ -57,9 +60,15 @@ const submitForm = async () => {
   await $fetch("/api/sessions/create", {
     method: "POST",
     body: formData,
-  }).then(async () => {
+  }).then(async (e) => {
     await sessionStore.readSessions();
-    // sessionStore.session = {};
+    console.log(e);
+
+    navStore.pushToNav({
+      order: 99,
+      route: "/sessions/" + e.id,
+      name: "Current",
+    });
   });
 };
 </script>

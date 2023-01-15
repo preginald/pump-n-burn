@@ -19,6 +19,7 @@ export const useSessionStore = defineStore("SessionStore", {
         startDateTime: dateToISOLikeButLocal(new Date()),
         finishDateTime: dateToISOLikeButLocal(new Date()),
       }),
+      openSession: ref({}),
       formData: ref({
         id: "",
         gymId: "",
@@ -37,6 +38,11 @@ export const useSessionStore = defineStore("SessionStore", {
     async readSession(id: string) {
       const { data } = await useFetch("/api/sessions/" + id);
       this.session = data;
+    },
+    async readOpenSession() {
+      const { data: openSession } = await useFetch("/api/sessions/open");
+      this.openSession = openSession;
+      return openSession;
     },
     toggleForm(state: boolean) {
       this.form = state;

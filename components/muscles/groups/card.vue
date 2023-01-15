@@ -12,8 +12,6 @@
         </span>
       </div>
     </div>
-    <!-- <p class="id">{{ muscleGroup.id }}</p> -->
-    <!-- <pre>{{ muscleGroup.exercises }}</pre> -->
     <span v-for="exercise in muscleGroup.exercises" class="badge-dark">
       {{ exercise.exercise.name }}
     </span>

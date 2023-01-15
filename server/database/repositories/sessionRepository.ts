@@ -32,6 +32,15 @@ export async function readSessionById(id: string) {
     },
   });
 }
+
+export async function getMostRecentOpenSession() {
+  const sessions = await prisma.session.findMany({
+    where: { finish: null },
+    orderBy: { start: "desc" },
+  });
+  return sessions[0];
+}
+
 export async function updateSession(id: string, data: any) {
   return await prisma.session.update({
     where: {

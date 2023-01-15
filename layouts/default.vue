@@ -3,21 +3,40 @@
     <header class="shadow-sm bg-white">
       <nav class="container mx-auto p-4 flex justify-between">
         <ul class="flex gap-4">
-          <li>
-            <NuxtLink to="/">Home</NuxtLink>
+          <li v-for="element in navStore.navElements">
+            <!-- {{ element }} -->
+            <NuxtLink :to="element.route">{{ element.name }}</NuxtLink>
           </li>
-          <li><NuxtLink to="/gyms">Gyms</NuxtLink></li>
-          <li><NuxtLink to="/sessions">Sessions</NuxtLink></li>
-          <li><NuxtLink to="/exercises">Exercises</NuxtLink></li>
-          <li><NuxtLink to="/muscles">Muscles</NuxtLink></li>
         </ul>
       </nav>
     </header>
   </div>
+  <!-- <pre v-if="openSession">{{ openSession }}</pre> -->
+  <!-- <pre>{{ sessionStore.openSession }}</pre> -->
   <div class="container mx-auto p-4">
     <slot />
   </div>
 </template>
+
+<script setup lang="ts">
+import { useNavStore } from "@/stores/NavStore";
+import { useSessionStore } from "@/stores/SessionStore";
+const navStore = useNavStore();
+const sessionStore = useSessionStore();
+const openSession = await sessionStore.readOpenSession();
+
+// console.log(openSession.value === null);
+
+if (openSession.value !== null) {
+  if (openSession.id !== null) {
+    navStore.pushToNav({
+      order: 99,
+      route: "/sessions/" + openSession.value.id,
+      name: "Current",
+    });
+  }
+}
+</script>
 
 <style scoped>
 .router-link-exact-active {
