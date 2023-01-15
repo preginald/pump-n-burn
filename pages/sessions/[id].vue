@@ -17,7 +17,14 @@
         >
           End Session
         </button>
-        <button @click="openForm" class="btn-green-lg">Add Set</button>
+        <button
+          v-if="sessionStore.inProgress()"
+          @click="openForm"
+          class="btn-green-lg"
+        >
+          Add Set
+        </button>
+        <button v-else @click="" class="btn-green-lg">Reopen Session</button>
       </div>
     </div>
   </div>
@@ -42,7 +49,6 @@ const openForm = () => {
   setStore.lastSet();
 };
 const finishSession = () => {
-  console.log("Show form with finish time to now");
   sessionStore.editForm();
   sessionStore.toggleForm(true);
   setStore.reset();
