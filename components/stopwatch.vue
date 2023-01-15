@@ -46,13 +46,19 @@ function start() {
 //   clearInterval(stopwatchStore.started);
 // }
 
+// function reset() {
+//   stopwatchStore.running = false;
+//   clearInterval(stopwatchStore.started);
+//   stopwatchStore.stoppedDuration = 0;
+//   stopwatchStore.timeBegan = null;
+//   stopwatchStore.timeStopped = null;
+//   setStore.duration = "00:00:00.000";
+//   startBtnState.value = "Start";
+// }
+
 function reset() {
-  stopwatchStore.running = false;
-  clearInterval(stopwatchStore.started);
-  stopwatchStore.stoppedDuration = 0;
-  stopwatchStore.timeBegan = null;
-  stopwatchStore.timeStopped = null;
-  setStore.duration = "00:00:00.000";
+  stopwatchStore.reset();
+  // setStore.duration = "00:00:00.000";
   startBtnState.value = "Start";
 }
 

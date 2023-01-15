@@ -210,6 +210,7 @@ async function submitForm() {
     setStore.reset();
     setStore.start();
     setStore.resetDuration();
+    stopwatchStore.reset();
   });
 }
 
