@@ -45,9 +45,6 @@ const finishSession = () => {
   console.log("Show form with finish time to now");
   sessionStore.editForm();
   sessionStore.toggleForm(true);
-  // console.log("User clicks save button");
-  // console.log("Rest counter stops");
-  // console.log("Session table updated with finish datetime");
-  // console.log("Show resume button");
+  setStore.reset();
 };
 </script>
