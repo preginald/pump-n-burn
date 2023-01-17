@@ -5,9 +5,10 @@
     class="card-container"
   >
     <div class="flex justify-between">
-      <h6>{{ exercise.type }} {{ exercise.name }}</h6>
+      <h6>{{ exercise.name }}</h6>
     </div>
     <div>
+      <span class="badge-default">{{ exercise.type }}</span>
       <span v-for="agonist in exercise.agonists" class="badge-red self-end">
         {{ agonist.agonist.name }}
       </span>
