@@ -23,12 +23,7 @@ export async function createExercise(data: any) {
 
 export async function readExercises() {
   return await prisma.exercise.findMany({
-    // include: {
-    //   agonists: true, // Return all fields
-    //   include: {
-    //     muscleGroup: true,
-    //   },
-    // },
+    orderBy: { name: "asc" },
     include: { agonists: { include: { agonist: true } }, sets: true },
   });
 }
