@@ -13,6 +13,11 @@ export async function readSessions() {
     },
     include: {
       gym: true, // Return all fields
+      sets: {
+        include: {
+          exercise: true,
+        },
+      },
     },
   });
 }

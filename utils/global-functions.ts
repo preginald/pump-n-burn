@@ -75,4 +75,9 @@ export default {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
     return `${diffDays} days ago`;
   },
+  prettyDateTime(datetimeString: any) {
+    // Create a Date object from the datetime string
+    const date = new Date(datetimeString);
+    return date.toLocaleString();
+  },
 };

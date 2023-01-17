@@ -44,6 +44,10 @@ export const useSessionStore = defineStore("SessionStore", {
       this.openSession = openSession;
       return openSession;
     },
+    async reopenSession(id: string) {
+      const { data } = await useFetch("/api/sessions/reopen/" + id);
+      return data;
+    },
     toggleForm(state: boolean) {
       this.form = state;
     },

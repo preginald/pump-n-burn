@@ -5,7 +5,16 @@
     class="card-container"
   >
     <div class="flex justify-between">
-      <h6>{{ exercise.name }}</h6>
+      <div>
+        <h6>{{ exercise.name }}</h6>
+      </div>
+      <div>
+        <span class="badge-default">
+          {{
+            globalFunctions.convertDateToDaysAgo(exercise.mostRecentSetStart)
+          }}
+        </span>
+      </div>
     </div>
     <div>
       <span class="badge-default">{{ exercise.type }}</span>

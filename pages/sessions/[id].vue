@@ -24,11 +24,46 @@
         >
           Add Set
         </button>
-        <button v-else @click="" class="btn-green-lg">Reopen Session</button>
+        <button
+          v-else
+          @click="sessionStore.reopenSession(sessionStore.session.id)"
+          class="btn-green-lg"
+        >
+          Reopen Session
+        </button>
       </div>
     </div>
   </div>
-  <div v-for="set in setStore.sets">
+  <div>
+    <button
+      v-if="cardGroup"
+      @click="cardGroup = !cardGroup"
+      class="btn-default-md"
+    >
+      Grouped
+    </button>
+    <button v-else @click="cardGroup = !cardGroup" class="btn-default-md">
+      Ungrouped
+    </button>
+  </div>
+  <div
+    v-if="cardGroup"
+    v-for="exercise in groupSetsByExercise(sessionStore.session.sets)"
+    class="card-container mt-2"
+  >
+    <div class="flex justify-between">
+      <div>
+        <h6>{{ exercise.exercise.name }}</h6>
+      </div>
+      <div>
+        <span class="badge-default">{{ exercise.exercise.type }}</span>
+      </div>
+    </div>
+    <div v-for="set in exercise.sets">
+      <SetsCarde :set="set" />
+    </div>
+  </div>
+  <div v-else v-for="set in setStore.sets">
     <SetsCard :set="set" />
   </div>
 </template>
@@ -43,6 +78,8 @@ const session_id: string | string[] = useRoute().params.id;
 await sessionStore.readSession(session_id);
 await setStore.readSetsBySessionId(session_id);
 
+const cardGroup = ref(true);
+
 const openForm = () => {
   setStore.toggleForm(true);
   setStore.set.start = new Date().toISOString();
@@ -52,5 +89,34 @@ const finishSession = () => {
   sessionStore.editForm();
   sessionStore.toggleForm(true);
   setStore.reset();
+};
+
+const groupSetsByExercise = (sets: any[]) => {
+  sets.sort(
+    (a, b) => new Date(b.start).getTime() - new Date(a.start).getTime()
+  );
+  return Object.values(
+    sets.reduce((acc, set) => {
+      const exerciseId = set.exercise_id;
+      if (!acc[exerciseId]) {
+        acc[exerciseId] = {
+          exercise: { ...set.exercise, start: set.start },
+          sets: [],
+        };
+      }
+      acc[exerciseId].sets.push({
+        id: set.id,
+        start: set.start,
+        finish: set.finish,
+        duration: set.duration,
+        rest: set.rest,
+        weight: set.weight,
+        reps_r: set.reps_r,
+        reps_l: set.reps_l,
+        type: set.type,
+      });
+      return acc;
+    }, {})
+  );
 };
 </script>

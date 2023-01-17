@@ -22,10 +22,16 @@ export async function createExercise(data: any) {
 }
 
 export async function readExercises() {
-  return await prisma.exercise.findMany({
+  const exercises = await prisma.exercise.findMany({
     orderBy: { name: "asc" },
     include: { agonists: { include: { agonist: true } }, sets: true },
   });
+
+  exercises.forEach((exercise) => {
+    const mostRecentSetStart = exercise.sets[0] ? exercise.sets[0].start : null;
+    exercise.mostRecentSetStart = mostRecentSetStart;
+  });
+  return exercises;
 }
 
 export async function readExerciseById(id: string) {
