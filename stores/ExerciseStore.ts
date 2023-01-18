@@ -15,7 +15,6 @@ export const useExerciseStore = defineStore("ExerciseStore", {
       form: ref(false),
     };
   },
-
   actions: {
     async readExercises() {
       const { data } = await useFetch("/api/exercises");

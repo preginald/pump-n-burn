@@ -5,7 +5,7 @@
         <select
           name="exercise"
           v-model="setStore.set.exercise_id"
-          @change="exerciseStore.readExercise"
+          @change="exerciseStore.readExercise()"
         >
           <option value="">Select an exercise</option>
           <option
@@ -141,30 +141,6 @@ const stopwatchStore = useStopwatchStore();
 
 const id: string | string[] = useRoute().params.id;
 await exerciseStore.readExercises();
-// await sessionStore.readSession(id);
-// await setStore.readSets();
-
-let setTypeSwitch = ref(false);
-
-const setUnitBtnLeft = () => {
-  setStore.set.type = setTypeSwitch.value ? "Warm" : "Heavy";
-};
-
-const setUnitBtnRight = () => {
-  setStore.set.type = setTypeSwitch.value ? "Warm" : "Heavy";
-};
-
-const setBtnLeft = () => {
-  return setStore.set.unit == "KG"
-    ? "btn-group-active-right"
-    : "btn-group-right";
-};
-
-const setBtnRight = () => {
-  return setStore.set.unit == "LB"
-    ? "btn-group-active-right"
-    : "btn-group-right";
-};
 
 function unilateral() {
   return exerciseStore.exercise.lateral == "Uni" ? true : false;
@@ -241,6 +217,4 @@ const submitDisabled = (): boolean => {
     }
   }
 };
-
-globalFunctions.greet("Pete");
 </script>
