@@ -62,13 +62,15 @@ const submitForm = async () => {
     body: formData,
   }).then(async (e) => {
     await sessionStore.readSessions();
-    console.log(e);
 
     navStore.pushToNav({
       order: 99,
       route: "/sessions/" + e.id,
       name: "Current",
+      icon: "healthicons:heart-cardiogram",
     });
+    sessionStore.toggleForm(false);
+    useRouter().push({ path: "/sessions/" + e.id });
   });
 };
 </script>
