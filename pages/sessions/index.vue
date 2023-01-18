@@ -1,6 +1,4 @@
 <template>
-  <button @click="push">Push</button>
-  <button @click="pop">Pop</button>
   <div class="card-container my-3">
     <div class="grid grid-cols-1">
       <SessionsForm v-if="sessionStore.form" />
