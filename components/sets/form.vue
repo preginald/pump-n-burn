@@ -76,6 +76,26 @@
           KG
         </button>
       </div>
+    </div>
+    <stopwatch v-if="isValidated()" />
+    <div v-if="isValidated()" class="grid gap-6 mb-6 grid-cols-2">
+      <div>
+        <label
+          for="reps_r"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          ><span v-if="unilateral()">Reps R</span>
+          <span v-else>Reps</span>
+        </label>
+        <input
+          @click="stopwatchStore.stop()"
+          v-model="setStore.set.reps_r"
+          type="number"
+          id="reps_r"
+          class=""
+          :placeholder="unilateral() ? 'Reps R' : 'Reps'"
+          required
+        />
+      </div>
       <div v-if="unilateral()">
         <label
           for="reps_l"
@@ -88,25 +108,6 @@
           id="reps_l"
           class=""
           placeholder="Reps Left"
-          required
-        />
-      </div>
-    </div>
-    <stopwatch v-if="isValidated()" />
-    <div v-if="isValidated()" class="grid gap-6 mb-6 grid-cols-2">
-      <div>
-        <label
-          for="reps_r"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Reps R</label
-        >
-        <input
-          @click="stopwatchStore.stop()"
-          v-model="setStore.set.reps_r"
-          type="number"
-          id="reps_r"
-          class=""
-          placeholder="Reps Right"
           required
         />
       </div>
