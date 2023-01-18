@@ -5,7 +5,14 @@
   </div>
   <SessionsEditForm v-if="sessionStore.form" />
   <SessionsCard :session="sessionStore.session" />
-  <Restwatch v-if="setStore.rest && sessionStore.inProgress()" />
+  <Restwatch
+    v-if="
+      setStore.rest &&
+      sessionStore.inProgress() &&
+      setStore.rest.duration !== '00:00:00.000'
+    "
+  />
+  <!-- {{ setStore.rest }} -->
   <div v-if="!sessionStore.form" class="card-container mt-2">
     <SetsForm v-if="setStore.form" />
     <div v-else>
