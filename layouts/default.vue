@@ -29,12 +29,13 @@ const sessionStore = useSessionStore();
 const openSession = await sessionStore.readOpenSession();
 
 if (openSession.value !== null) {
-  if (openSession.id !== null) {
-    console.log(openSession);
+  if (openSession.value.id !== null) {
+    // console.log(openSession);
     navStore.pushToNav({
       order: 99,
       route: "/sessions/" + openSession.value.id,
       name: "Current",
+      icon: "healthicons:heart-cardiogram",
     });
   }
 }
