@@ -43,11 +43,6 @@
       </div>
 
       <div>
-        <!-- <label
-            for="weight"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Weight</label
-          > -->
         <input
           v-model="setStore.set.weight"
           type="number"
@@ -61,24 +56,24 @@
         <button
           type="button"
           :class="
-            setStore.set.unit == 'KG'
+            setStore.set.unit == 'LB'
               ? 'btn-group-active-left'
               : 'btn-group-left'
-          "
-          @click="setStore.set.unit = 'KG'"
-        >
-          KG
-        </button>
-        <button
-          type="button"
-          :class="
-            setStore.set.unit == 'LB'
-              ? 'btn-group-active-right'
-              : 'btn-group-right'
           "
           @click="setStore.set.unit = 'LB'"
         >
           LB
+        </button>
+        <button
+          type="button"
+          :class="
+            setStore.set.unit == 'KG'
+              ? 'btn-group-active-right'
+              : 'btn-group-right'
+          "
+          @click="setStore.set.unit = 'KG'"
+        >
+          KG
         </button>
       </div>
       <div v-if="unilateral()">
