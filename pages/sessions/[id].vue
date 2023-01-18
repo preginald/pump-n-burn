@@ -42,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="mt-2">
+  <div v-if="sessionStore.hasSets()" class="mt-2">
     <button
       v-if="cardGroup"
       @click="cardGroup = !cardGroup"

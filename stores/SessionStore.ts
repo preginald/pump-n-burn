@@ -54,6 +54,9 @@ export const useSessionStore = defineStore("SessionStore", {
     inProgress() {
       return this.session.finish === null;
     },
+    hasSets() {
+      return this.session.sets.length > 0;
+    },
     editForm() {
       this.formData.id = this.session.id;
       this.formData.start = dateToISOLikeButLocal(new Date(this.session.start));
