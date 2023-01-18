@@ -8,26 +8,31 @@ export const useNavStore = defineStore("NavStore", {
           order: 0,
           route: "/",
           name: "Home",
+          icon: "ic:sharp-home",
         },
         {
           order: 1,
           route: "/gyms",
           name: "Gyms",
+          icon: "healthicons:ministry-of-health",
         },
         {
           order: 2,
           route: "/sessions",
           name: "Sessions",
+          icon: "healthicons:i-note-action",
         },
         {
           order: 3,
           route: "/exercises",
           name: "Exercises",
+          icon: "healthicons:exercise-weights",
         },
         {
           order: 4,
           route: "/muscles",
           name: "Muscles",
+          icon: "healthicons:body",
         },
       ]),
     };

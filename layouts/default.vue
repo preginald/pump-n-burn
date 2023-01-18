@@ -5,7 +5,10 @@
         <ul class="flex gap-4">
           <li v-for="element in navStore.navElements">
             <!-- {{ element }} -->
-            <NuxtLink :to="element.route">{{ element.name }}</NuxtLink>
+            <!-- <NuxtLink :to="element.route">{{ element.name }}</NuxtLink> -->
+            <NuxtLink :to="element.route"
+              ><Icon :name="element.icon" size="36px" :alt="element.name"
+            /></NuxtLink>
           </li>
         </ul>
       </nav>
