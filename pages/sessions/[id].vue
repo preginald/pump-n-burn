@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class="mt-2">
     <button
       v-if="cardGroup"
       @click="cardGroup = !cardGroup"
@@ -49,10 +49,10 @@
   <div
     v-if="cardGroup"
     v-for="exercise in groupSetsByExercise(sessionStore.session.sets)"
-    class="card-container mt-2"
+    class="card-container mb-2"
   >
     <div class="flex justify-between">
-      <div>
+      <div class="pt-1">
         <h6>{{ exercise.exercise.name }}</h6>
       </div>
       <div>

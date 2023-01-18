@@ -11,11 +11,11 @@ h2 {
 }
 
 h5 {
-  @apply mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white;
+  @apply mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white;
 }
 
 h6 {
-  @apply mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white;
+  @apply mb-2 text-sm font-bold tracking-tight text-gray-900 dark:text-white;
 }
 
 p {
