@@ -28,10 +28,9 @@ const navStore = useNavStore();
 const sessionStore = useSessionStore();
 const openSession = await sessionStore.readOpenSession();
 
-// console.log(openSession.value === null);
-
 if (openSession.value !== null) {
   if (openSession.id !== null) {
+    console.log(openSession);
     navStore.pushToNav({
       order: 99,
       route: "/sessions/" + openSession.value.id,
