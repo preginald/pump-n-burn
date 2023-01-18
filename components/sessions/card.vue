@@ -2,11 +2,14 @@
   <NuxtLink :to="`/sessions/${session.id}`">
     <div class="card-container">
       <div class="flex justify-between">
-        <div>
+        <!-- <div>
           <h5>{{ globalFunctions.prettyDateTime(session.start) }}</h5>
           <h5 v-if="session.finish !== null"></h5>
-        </div>
+        </div> -->
         <div>
+          <span class="badge-default">
+            {{ globalFunctions.convertDateToDaysAgo(session.start) }}
+          </span>
           <span class="badge-default">{{ session.gym.name }}</span>
         </div>
         <div v-if="session.finish === null">
