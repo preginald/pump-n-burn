@@ -5,7 +5,7 @@
   </div>
   <SessionsEditForm v-if="sessionStore.form" />
   <SessionsCard :session="sessionStore.session" />
-  <Restwatch v-if="setStore.rest" />
+  <Restwatch v-if="setStore.rest && sessionStore.inProgress()" />
   <div v-if="!sessionStore.form" class="card-container mt-2">
     <SetsForm v-if="setStore.form" />
     <div v-else>
@@ -24,8 +24,9 @@
         >
           Add Set
         </button>
+      </div>
+      <div v-if="!sessionStore.inProgress()" class="grid gap-3 grid-cols-1">
         <button
-          v-else
           @click="sessionStore.reopenSession(sessionStore.session.id)"
           class="btn-green-lg"
         >
