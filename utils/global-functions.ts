@@ -72,8 +72,17 @@ export default {
     const setDate = new Date(start);
     const currentDate = new Date();
     const diffTime = Math.abs(currentDate.getTime() - setDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
-    return `${diffDays} days ago`;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor(diffTime / (1000 * 60 * 60)) % 24;
+    const diffMinutes = Math.floor(diffTime / (1000 * 60)) % 60;
+
+    if (diffDays > 0) {
+      return `${diffDays} days ago`;
+    } else if (diffHours > 0) {
+      return `${diffHours} hours ago`;
+    } else {
+      return `${diffMinutes} minutes ago`;
+    }
   },
   prettyDateTime(datetimeString: any) {
     // Create a Date object from the datetime string
