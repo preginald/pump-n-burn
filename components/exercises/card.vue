@@ -6,7 +6,7 @@
   >
     <div class="flex justify-between">
       <div>
-        <h6>{{ exercise.name }}</h6>
+        <h6>{{ exercise.name }} {{ exercise.highestWeight }}</h6>
       </div>
       <div>
         <span class="badge-default">
