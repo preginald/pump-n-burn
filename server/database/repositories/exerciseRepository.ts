@@ -23,13 +23,19 @@ export async function createExercise(data: any) {
 
 export async function readExercises() {
   const exercises = await prisma.exercise.findMany({
+    include: {
+      agonists: { include: { agonist: true } },
+      sets: {
+        orderBy: { start: "desc" },
+      },
+    },
     orderBy: { name: "asc" },
-    include: { agonists: { include: { agonist: true } }, sets: true },
   });
-
   exercises.forEach((exercise) => {
     const mostRecentSetStart = exercise.sets[0] ? exercise.sets[0].start : null;
     exercise.mostRecentSetStart = mostRecentSetStart;
+    const maxWeight = Math.max(...exercise.sets.map((set) => set.weight), 0);
+    exercise.highestWeight = maxWeight;
   });
   return exercises;
 }
