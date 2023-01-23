@@ -24,7 +24,6 @@ export async function readMuscleGroups() {
             include: {
               sets: {
                 select: { start: true },
-                orderBy: { start: "desc" },
               },
             },
           },
@@ -34,10 +33,16 @@ export async function readMuscleGroups() {
   });
 
   muscleGroups.forEach((muscleGroup) => {
-    const mostRecentSet = muscleGroup.exercises.flatMap(
+    const sets = muscleGroup.exercises.flatMap(
       (exercise) => exercise.exercise.sets
-    )[0];
-    muscleGroup.mostRecentSetStart = mostRecentSet ? mostRecentSet.start : null;
+    );
+    const mostRecentSetStart = sets.reduce((mostRecent, set) => {
+      if (!mostRecent || new Date(set.start) > new Date(mostRecent)) {
+        return set.start;
+      }
+      return mostRecent;
+    }, null);
+    muscleGroup.mostRecentSetStart = mostRecentSetStart;
   });
 
   return muscleGroups.sort((a, b) =>
