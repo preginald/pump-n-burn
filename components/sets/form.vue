@@ -5,7 +5,7 @@
         <select
           name="exercise"
           v-model="setStore.set.exercise_id"
-          @change="exerciseStore.readExercise()"
+          @change="exerciseStore.readExercises()"
         >
           <option value="">Select an exercise</option>
           <option
@@ -176,13 +176,13 @@ async function submitForm() {
     method: "POST",
     body: formData,
   }).then(async () => {
-    setStore.readSetsBySessionId(id);
     setStore.toggleForm(false); //
     setStore.toggleRest(true); //
     setStore.reset();
     setStore.start();
     setStore.resetDuration();
     stopwatchStore.reset();
+    sessionStore.readSession(id);
   });
 }
 
