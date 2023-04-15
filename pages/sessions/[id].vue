@@ -84,7 +84,6 @@ const setStore = useSetStore();
 
 const session_id: string | string[] = useRoute().params.id;
 await sessionStore.readSession(session_id);
-await setStore.readSetsBySessionId(session_id);
 
 const cardGroup = ref(true);
 
