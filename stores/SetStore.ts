@@ -17,7 +17,7 @@ export const useSetStore = defineStore("SetStore", {
         duration: "",
         rest: "",
       }),
-      duration: "00:00:00.000",
+      duration: "00:00:00.0",
       form: ref(false),
       rest: ref({
         form: ref(false),
@@ -26,7 +26,7 @@ export const useSetStore = defineStore("SetStore", {
         stoppedDuration: ref(),
         started: ref(),
         running: ref(false),
-        duration: "00:00:00.000",
+        duration: "00:00:00.0",
       }),
     };
   },
@@ -54,7 +54,7 @@ export const useSetStore = defineStore("SetStore", {
       this.sets.sort((a, b) => new Date(b.start) - new Date(a.start));
     },
     resetDuration(): any {
-      this.duration = "00:00:00.000";
+      this.duration = "00:00:00.0";
     },
     start() {
       if (this.rest.running) return;
@@ -82,6 +82,8 @@ export const useSetStore = defineStore("SetStore", {
         sec = timeElapsed.getUTCSeconds(),
         ms = timeElapsed.getUTCMilliseconds();
 
+      ms = Math.floor(ms / 100); // Divide by 100 and round down to get a single decimal place
+
       this.rest.duration =
         this.zeroPrefix(hour, 2) +
         ":" +
@@ -89,7 +91,7 @@ export const useSetStore = defineStore("SetStore", {
         ":" +
         this.zeroPrefix(sec, 2) +
         "." +
-        this.zeroPrefix(ms, 3);
+        this.zeroPrefix(ms, 1); // Change the number of digits to 1
     },
     stop() {
       this.rest.running = false;
@@ -109,7 +111,7 @@ export const useSetStore = defineStore("SetStore", {
       this.rest.stoppedDuration = 0;
       this.rest.timeBegan = null;
       this.rest.timeStopped = null;
-      this.rest.duration = "00:00:00.000";
+      this.rest.duration = "00:00:00.0";
     },
   },
 
