@@ -18,6 +18,7 @@ export const useSessionStore = defineStore("SessionStore", {
         gymId: "",
         startDateTime: dateToISOLikeButLocal(new Date()),
         finishDateTime: dateToISOLikeButLocal(new Date()),
+        sets: [],
       }),
       openSession: ref({}),
       formData: ref({
