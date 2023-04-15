@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-6 mb-6 grid-cols-1">
-    <div>
+    <div class="text-center">
       <p class="text-6xl text-gray-900 dark:text-white">
         {{ setStore.duration }}
       </p>
@@ -88,6 +88,8 @@ function clockRunning() {
   var sec = timeElapsed.getUTCSeconds();
   var ms = timeElapsed.getUTCMilliseconds();
 
+  ms = Math.floor(ms / 100); // Divide by 100 and round down to get a single decimal place
+
   setStore.duration =
     zeroPrefix(hour, 2) +
     ":" +
@@ -95,7 +97,7 @@ function clockRunning() {
     ":" +
     zeroPrefix(sec, 2) +
     "." +
-    zeroPrefix(ms, 3);
+    zeroPrefix(ms, 1); // Change the number of digits to 1
 }
 
 function zeroPrefix(num: number, digit: number) {
