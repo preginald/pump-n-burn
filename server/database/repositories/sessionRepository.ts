@@ -33,6 +33,9 @@ export async function readSessionById(id: string) {
         include: {
           exercise: true,
         },
+        orderBy: {
+          start: "desc",
+        },
       },
     },
   });
